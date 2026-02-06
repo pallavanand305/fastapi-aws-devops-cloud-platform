@@ -14,6 +14,7 @@ from src.shared.database_local import init_db, check_db_connection
 from src.shared.logging import configure_logging, get_logger, set_correlation_id
 from src.shared.schemas import HealthCheckResponse, ErrorResponse
 from src.shared.exceptions import MLPlatformException
+from src.shared.middleware import AuditLoggingMiddleware
 from src.services.user_management.routes import router as auth_router
 
 # Configure logging
@@ -68,6 +69,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Add audit logging middleware
+app.add_middleware(AuditLoggingMiddleware, log_request_body=False, log_response_body=False)
 
 
 @app.middleware("http")

@@ -163,5 +163,7 @@ htmlcov/
 *.bak
 *.backup
 
-# Kiro IDE specs and configuration
-.kiro/
+# Kiro IDE - exclude temporary files but keep specs
+.kiro/cache/
+.kiro/temp/
+.kiro/.tmp/
